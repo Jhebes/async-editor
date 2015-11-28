@@ -1,0 +1,22 @@
+{
+  "name": "Server",
+  "description": "WPI CS 4241 assignment",
+  "main": "server.js",
+  "authors": [
+    "Josh Hebert"
+  ],
+  "license": "MIT",
+  "moduleType": [],
+  "homepage": "",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jsdiff": "~2.2.1"
+  }
+}

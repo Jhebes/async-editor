@@ -1,0 +1,85 @@
+/* Josh Hebert */
+.divider {
+    margin-left:auto;
+    margin-right:auto;
+    border-bottom: 1px solid lightgrey;
+    width: 90%;
+}
+
+#editor {
+    width: 90%;
+    margin-left: auto;
+    margin-right:auto;
+}
+
+#doc{
+    background: #dddddd;
+    overflow: auto;
+    width: auto;
+}
+
+textarea {
+    margin-top: 50px;
+    margin-bottom: 50px;
+    padding: 60px;
+    padding-top: 60px;
+    padding-bottom: 90px;
+    border:none;
+    height: 90%;
+    width: 100%;
+    resize: none;
+    overflow: hidden;
+    min-height: 50px;
+}
+
+body {
+    display: inline;
+    margin: 0px;
+}
+
+
+#sidebar {
+    float: left;
+    background: #ffffff;
+    height: 100%;
+}
+#sidebar.hide{
+    transform: translate(-200px,0px);
+    width: 0px;
+}
+#sidebar.show {
+    width: 200px;
+    transform: translate(0px,0px);
+}
+
+#sidebar ul {
+    padding: 0px;
+    margin: 0px;
+}
+#sidebar li {
+    margin: 15px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    padding-left: 20px;
+    width: 150px;
+    display:flex;
+    align-items: center;
+    list-style: none;
+    height: 40px;
+    border-radius: 4px;
+}
+
+#sidebar li:hover {
+    background: #dddddd;
+}
+#titlebar {
+    height: 50px; 
+    background:#BDD4DE;
+    display:flex;
+    align-items: center;
+    padding-left: 20px;
+
+    color: #ffffff;
+    font-size: 2em;
+}
+

@@ -1,0 +1,28 @@
+<!--Josh Hebert -->
+<html> 
+    <head> 
+        <title>AJAX Asynchronous File Editor</title>
+    </head>
+    <body>
+
+        <div id="titlebar">
+            <img src="img/menu.png" style="height:20px;width:30px;" onclick="toggleSidebar( )"/>
+            <div id="title" style="padding-left:20px;">
+                New File
+            </div>
+        </div>
+        <div id="sidebar" class="hide">
+            <!-- Sidebar -->
+            <ul>
+                <li>About</li>
+                <div class="divider"></div>
+                <li>How it works</li>
+            </ul>
+        </div>
+        <div id="doc">
+            <div id="editor">
+                <textarea id="free_edit" rows=5000 onload="autoexpand( this )" onkeyup="modify( this )"></textarea>
+            </div>
+        </div>
+    </body>
+</html>
