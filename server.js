@@ -1,7 +1,7 @@
 // Josh Hebert
 
-// App is hosted at https://jh-cs4241-assn4.herokuapp.com/
-
+// App is hosted at https://jh-cs4241-assn5.herokuapp.com/
+// Check the sidebar for my writeup of what this is
 
 var express = require( "express" );
 var q = require( "q" );
