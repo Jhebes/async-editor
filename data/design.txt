@@ -1,0 +1,10 @@
+- How is this different from that thing you submitted for the last assignment?
+
+Well, the problem here is that I didn't realize this assignment was going to revolve around AJAX. If I had, I wouldn't have submitted what I did last time, as it's all data exchange tricks. So it already kind of fulfilled the requirements for this assignment. I talked with the professor and asked if I could just improve what I had turned in last time. He okayed it, so that's this.
+So what did I improve? The big thing is that this isn't based on keycodes anymore. You can put in whatever text you want, paste stuff, block delete, whatever, and it's fine. I'm using JSDiff to compare the last good copy from the server and create a changelist from the new modifications. This is then submitted to the server, where it's merged in. Another big thing is that I switched from file watchers to a publish/subscribe system, meaning that the function to edit the file emits a signal whenever it's called, immediately resolving all longpoll requests. As a result, edit propagation latency is now only a function of the network speed. Finally, I added support for the creation and editing of any file. See up top where it says 'file='? Set that to anything and a new file will be created.
+
+- What are the new design problems with this?
+
+Unfortunately, I haven't perfected the merge function yet. It's still very rudimentary, as you'll notice if you try typing too fast, especially with long docs. If you read the design I drafted in the comments of js/request.js (starts line 23), you'll see I started planning on how to alleviate this. Right now, all you can do is increase m, which is the number of chars buffered before the patch is sent to the server. Higher numbers means it works better when only one person is working on this, but it decreases the effectiveness with multiple people
+
+Bottom line, this does everything homework 5 has requested, while still improving on what I submitted for the prior one.

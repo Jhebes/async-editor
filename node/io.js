@@ -47,40 +47,20 @@ module.exports = {
         });
         return p_done.promise;
     },
-    edit : function( file, location, keycode ){
-        var p_done = q.defer( );
-        this.readFile( file ).then( function( data ){
-            // Backspace action
-            if( keycode == 8 ){
-                data = data.slice( 0, location - 1 ) + data.slice( location, data.length );
-                //Alphanumeric keys
-            }else if( ( keycode >= 48 && keycode <= 90 ) || keycode == 32 ){
-                data = data.substr( 0, location ) + String.fromCharCode( keycode ) + data.substr( location );
-            }else if( keycode == 13 ){
-                data = data.substr( 0, location ) + "\n" + data.substr( location );
-            }
-
-            fs.writeFile( file, data, 'utf8', function( err, data ){
-                if( err ){
-                    return console.log( err );
-                }
-                p_done.resolve( );
-            });
-        });
-        return p_done.promise;
-    },
 
     //  Based on the assumptions made in request.js, we will assume:
     //      1. There is only one CER per patch
-    //
     patch : function( file, patch ){
         // Naively patch for now (i.e. assume nobody is editing at the same time; basically,
         // no merge conflicts
         var loc = 0;
         var p_done = q.defer( );
         this.readFile( file ).then( function( data ){
-            patch.forEach( function( change ){
-                // This implementation is bad, and breaks with rapid edits to the doc
+            
+            // This implementation is bad, and breaks with rapid edits to the doc
+            for( var i = 0; i < patch.length; ++i ){
+                var change = patch[ i ];
+
                 if( change.added ){
                     data = data.substr( 0, loc ) + change.value + data.substr( loc );
                     loc += change.count;
@@ -90,7 +70,7 @@ module.exports = {
                 }else{
                     loc += change.count;
                 }
-            });
+            }
 
 
             fs.writeFile( file, data, 'utf8', function( err, data ){
@@ -100,7 +80,8 @@ module.exports = {
                 p_done.resolve( );
             });
         });
+        
         return p_done.promise;
-
+        
     }
 };

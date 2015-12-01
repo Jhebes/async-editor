@@ -39,32 +39,31 @@ var sendPOST = function( data, url, cb ){
 //         a new CER
 var n = 1000;
 var m = 3;
-
+//var CER_start = 0;
+//var CER_last = 0;
 
 // Still need to implement 2 and 3
 var buffered_edits = 0;
 var modify = function( e ){
-    ++buffered_edits;
-    if( buffered_edits == 1 ){
-        setTimeout( function( ){
+    var elem = document.getElementById( "free_edit" );
+    var commit = function( ){
             q.action = "MODIFY";
-            q.patch = JsDiff.diffChars( snapshot, document.getElementById( "free_edit" ).value );
+            q.patch = JsDiff.diffChars( snapshot, elem.value );
             sendPOST( q, "/edit", function( resp ){ } );
             buffered_edits = 0;
+    };
+    ++buffered_edits;
+    // What to do on the creation of a CER
+    if( buffered_edits == 1 ){
+        //CER_start = elem.selectionStart;
+        //CER_last = elem.selectionEnd;
+        setTimeout( function( ){
+            commit( );
         }, n );
     }
 
     if( buffered_edits == m ){
-        // Here, we will do the following things:
-        //  1. Identify where we are in the doc
-        //  2. Determine how far we need to span 
-        q.action = "MODIFY";
-        q.patch = JsDiff.diffChars( snapshot, document.getElementById( "free_edit" ).value );
-        sendPOST( q, "/edit", function( resp ){
-        
-        });
-
-        buffered_edits = 0;
+        commit( );
         clearTimeout( );
     }
 }
@@ -90,6 +89,8 @@ var longPoll = function( ){
             var cursor_pos_start = edit_field.selectionStart;
             var cursor_pos_end = edit_field.selectionEnd;
             edit_field.value = resp.content;
+        
+        
             snapshot = resp.content;
             edit_field.selectionStart = cursor_pos_start;
             edit_field.selectionEnd = cursor_pos_end;

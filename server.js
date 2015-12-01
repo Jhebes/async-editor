@@ -100,6 +100,8 @@ app.get( /\/*/, function( req, res ) {
         f = f.replace( "~", "" );
         
         textFile = dataFileDir + f;
+    }else{
+        textFile = dataFileDir + "/data.txt"
     }
     // Promise that we'll check for a search keyword and then
     // act on it if it exists
